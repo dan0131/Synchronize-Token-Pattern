@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>IT151144904</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <style type="text/css" >
+    body {
+      background: lightgray;
+      font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif,  Open Sans;
+      font-size: 14px;
+      line-height: 1.42857;
+      height: 350px;
+      padding: 0;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-weight: 400;
+      overflow-x: hidden;
+      overflow-y: auto;
+        
+    }
+    .form-control {
+      background-color: #ffffff;
+      background-image: none;
+      border: 1px solid #999999;
+      border-radius: 0;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+      color: #333333;
+      display: block;
+      font-size: 14px;
+      height: 34px;
+      line-height: 1.42857;
+      padding: 6px 12px;
+      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+      width: 100%;
+    }
+
+    .login-box, .register-box {
+      width: 360px;
+      margin: 7% auto;
+    }
+    .login-page, .register-page {
+      background: #d2d6de;
+    }
+    .login-logo, .register-logo {
+      font-size: 35px;
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 300;
+    }
+    .login-box-msg, .register-box-msg {
+      margin: 0;
+      text-align: center;
+      padding: 0 20px 20px 20px;
+    }
+    .login-box-body, .register-box-body {
+      background: #fff;
+      padding: 20px;
+      border-top: 0;
+      color: #666;
+    }
+    .has-feedback {
+      position: relative;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .has-feedback .form-control {
+      padding-right: 42.5px;
+    }
+    .login-box-body .form-control-feedback, .register-box-body .form-control-feedback {
+      color: #777;
+    }
+    .form-control-feedback {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      display: block;
+      width: 34px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .checkbox, .radio {
+      position: relative;
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .icheck>label {
+      padding-left: 0;
+    }
+    .checkbox label, .radio label {
+      min-height: 20px;
+      padding-left: 20px;
+      margin-bottom: 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body onload="getToken()">
+	
+    <div class="login-box">
+      <div class="login-logo">
+        <h2>Add Post</h2>
+      </div><!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg">Add your post</p>
+      <form action="/posts" method="post" id="postForm">
+        <div class="form-group has-feedback">
+          <input type="text" name="title" value=""  class="form-control" id="login" maxlength="80" size="30" placeholder="Post Title">            
+          
+        </div>
+        <div class="form-group has-feedback">
+          <textarea  name="message" value=""  class="form-control" id="password" size="30" placeholder="Post Body"></textarea>
+        </div>
+        <div class="row">
+    
+          <div class="col-xs-4">
+            <input type="submit" name="submit" value="Post" id="submit" class="btn btn-primary btn-block btn-flat">        
+          </div><!-- /.col -->
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+<script type="text/javascript">
+  function getToken() {
+    console.log('load')
+    $.post('/gettoken',{},function(data, status){
+      console.log(data);
+      if(data.success){
+        $("#postForm").append(
+            `<input type="text" hidden name="token" id="inputToken" value=${data.token} />`
+        )
+      }
+    });
+  }
+</script>
